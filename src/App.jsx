@@ -128,11 +128,13 @@ function App() {
         </div>
       </div>
 
-      <h2 className="text-2xl mt-4 font-semibold">
-        You Selected <strong>{selectedCity}</strong>,{" "}
-        <span className="text-gray-500">{selectedState}</span>,{" "}
-        <span className="text-gray-500">{selectedCountry}</span>
-      </h2>
+      {selectedCity && selectedState && selectedCountry && (
+        <h2 className="text-2xl mt-4 font-semibold">
+          You Selected <span>{selectedCity}</span>,{" "}
+          <span className="text-gray-500">{selectedState}</span>,{" "}
+          <span className="text-gray-500">{selectedCountry}</span>
+        </h2>
+      )}
     </section>
   );
 }
