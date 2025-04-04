@@ -12,13 +12,18 @@ function App() {
 
   useEffect(() => {
     async function fetchCountries() {
-      setLoading(true);
-      const response = await fetch(
-        `https://crio-location-selector.onrender.com/countries`
-      );
-      const data = await response.json();
-      setCountries(data);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const response = await fetch(
+          `https://crio-location-selector.onrender.com/countries`
+        );
+        const data = await response.json();
+        setCountries(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+        setLoading(false);
+      }
     }
     fetchCountries();
   }, []);
@@ -27,13 +32,18 @@ function App() {
     if (!selectedCountry) return;
 
     async function fetchStates() {
-      setLoading(true);
-      const response = await fetch(
-        `https://crio-location-selector.onrender.com/country=${selectedCountry}/states`
-      );
-      const data = await response.json();
-      setStates(data);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const response = await fetch(
+          `https://crio-location-selector.onrender.com/country=${selectedCountry}/states`
+        );
+        const data = await response.json();
+        setStates(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching states:", error);
+        setLoading(false);
+      }
     }
     fetchStates();
   }, [selectedCountry]);
@@ -42,13 +52,18 @@ function App() {
     if (!selectedState) return;
 
     async function fetchCities() {
-      setLoading(true);
-      const response = await fetch(
-        `https://crio-location-selector.onrender.com/country=${selectedCountry}/state=${selectedState}/cities`
-      );
-      const data = await response.json();
-      setCities(data);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const response = await fetch(
+          `https://crio-location-selector.onrender.com/country=${selectedCountry}/state=${selectedState}/cities`
+        );
+        const data = await response.json();
+        setCities(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching cities:", error);
+        setLoading(false);
+      }
     }
     fetchCities();
   }, [selectedState]);
@@ -62,9 +77,11 @@ function App() {
             name="country"
             id="country"
             onChange={(e) => setSelectedCountry(e.target.value)}
+            disabled={loading}
+            value={selectedCountry}
             className="focus:outline-none cursor-pointer w-full"
           >
-            <option>{loading ? "Loading..." : "Select Country"}</option>
+            <option>Select Country</option>
             {countries.length > 0 &&
               countries.map((country) => (
                 <option key={country} value={country}>
@@ -78,9 +95,11 @@ function App() {
             name="state"
             id="state"
             onChange={(e) => setSelectedState(e.target.value)}
+            disabled={!selectedCountry}
+            value={selectedState}
             className="focus:outline-none cursor-pointer w-full"
           >
-            <option>{loading ? "Loading..." : "Select State"}</option>
+            <option>Select State</option>
             {states.length > 0 &&
               states.map((state) => (
                 <option key={state} value={state}>
@@ -94,9 +113,11 @@ function App() {
             name="city"
             id="city"
             onChange={(e) => setSelectedCity(e.target.value)}
+            disabled={!selectedState}
+            value={selectedCity}
             className="focus:outline-none cursor-pointer w-full"
           >
-            <option>{loading ? "Loading..." : "Select city"}</option>
+            <option>Select city</option>
             {cities.length > 0 &&
               cities.map((city) => (
                 <option key={city} value={city}>
