@@ -78,7 +78,6 @@ function App() {
             id="country"
             onChange={(e) => setSelectedCountry(e.target.value)}
             disabled={loading}
-            value={selectedCountry}
             className="focus:outline-none cursor-pointer w-full"
           >
             <option>Select Country</option>
@@ -96,7 +95,6 @@ function App() {
             id="state"
             onChange={(e) => setSelectedState(e.target.value)}
             disabled={!selectedCountry}
-            value={selectedState}
             className="focus:outline-none cursor-pointer w-full"
           >
             <option>Select State</option>
@@ -114,7 +112,6 @@ function App() {
             id="city"
             onChange={(e) => setSelectedCity(e.target.value)}
             disabled={!selectedState}
-            value={selectedCity}
             className="focus:outline-none cursor-pointer w-full"
           >
             <option>Select city</option>
