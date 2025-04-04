@@ -80,7 +80,7 @@ function App() {
             disabled={loading}
             className="focus:outline-none cursor-pointer w-full"
           >
-            <option>Select Country</option>
+            <option>{loading ? "undefined" : "Select Country"}</option>
             {countries.length > 0 &&
               countries.map((country) => (
                 <option key={country} value={country}>
@@ -97,7 +97,7 @@ function App() {
             disabled={!selectedCountry}
             className="focus:outline-none cursor-pointer w-full"
           >
-            <option>Select State</option>
+            <option>{loading ? "undefined" : "Select State"}</option>
             {states.length > 0 &&
               states.map((state) => (
                 <option key={state} value={state}>
@@ -114,7 +114,7 @@ function App() {
             disabled={!selectedState}
             className="focus:outline-none cursor-pointer w-full"
           >
-            <option>Select city</option>
+            <option>{loading ? "undefined" : "Select City"}</option>
             {cities.length > 0 &&
               cities.map((city) => (
                 <option key={city} value={city}>
